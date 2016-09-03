@@ -5,11 +5,7 @@ An observation act is an observation "associated with a discrete time instant or
 
 For example, a military unit's location at discrete time intervals is observed by processing geospatial coordinates communicated by a platform sensor.
 
-##Data Model Design
-See [information about the data model](file://./src/main/resources/documentation/data-model-design.md) for topics such as:
+##[Data model design](./src/main/resources/documentation/data-model-design.md)
 
-  * data model example
-  * rational for a flatter data model
-  * RDFa for semantics links
   
   
