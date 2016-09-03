@@ -75,7 +75,7 @@ The following example depicts a simplified instance that is represented by a tre
 
 The data format model represented above is fairly flat.  However, a deep and broad logical directional graph data model is formed when data components are linked by descriptive associations.  The image below depicts the directional graph data model for the above instance:
 
-![network graph image created by https://github.com/apcj/arrows](file://./example-simplified-instance-directional-graph-data-model_006.PNG)
+![network graph image created by https://github.com/apcj/arrows](./example-simplified-instance-directional-graph-data-model_006.PNG)
 
 
 ###Flatter vs Deeper Rational
