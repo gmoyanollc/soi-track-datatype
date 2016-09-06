@@ -1,21 +1,61 @@
-##Data Model
-The SOI Track data format is modeled with 1) entities and activities, 2) observation results, and 3) sensors as first-class data components.
+#Data Model Design
+The SOI Track data model design is best described by the following differentiating topics:
 
-###Context
+  * First-Class Data Components
+  * Context-Within-Context
+  * Example Instance
+  * Flatter vs. Deeper
+  
 
-Context for a data component 1) clarifies what the data component represents and 2) its relationship to other data components.  
+##First-Class Data Components
+The SOI Track data model represents 3 top-level, first-class concepts:
+```
+     .................      ...............      ..........
+    :  ObservedThing  :    :  Observation  :    :  Sensor  :
+     .................      ...............      ..........
+```
+ObservedThings, Observations, Sensors are abstract data components with multiple representations:
+```
+          ..............................
+         :         Observed-Thing       :
+          ..............................
+           ^            ^             ^
+           |            |             |
+    /--------\    /------------\    /-----------------------\
+    |  Unit  |    |  Platform  |    |  Civil Demonstration  |
+    \--------/    \------------/    \-----------------------/
+    
+              .............................
+             :         Observation         :
+              .............................
+               ^            ^            ^
+               |            |            |
+    /------------\    /-----------\    /---------------\
+    |  Position  |    |  Kinetic  |    |  Temperature  |
+    \------------/    \-----------/    \---------------/
 
-Context is pre-defined by a data component's schema-given label and position in the XML data model.  Furthermore, meta-data components may be added to the XML data model to extend this capability with run-time values.  The SOI Track data model has  RDFa-specified attributes that may be used to add context to data chunks.  A data chunk is a value instance of a data component.
+          ..............................
+         :           Sensor             :
+          ..............................
+           ^            ^             ^
+           |            |             |
+    /--------\    /------------\    /--------------\
+    |  Unit  |    |  Platform  |    |  Instrument  |
+    \--------/    \------------/    \--------------/
+```
+##Context-Within-Context
+Context-within-context is a design approach that enables the containment of contextual content within the data component it enriches.  
 
-####RDFa
-RDFa (Resource Description Framework in Attributes)[https://en.wikipedia.org/wiki/RDFa] is a W3C Recommendation that defines a set of attribute-level data components for linking and expressing facts about data.  The set of attributes map to the W3C RDF data-model, thereby, enabling the embedding of RDF subject-predicate-object expressions within an XML document. 
+Contextual content is information about a data component's instance.  For example, contextual content may 
 
-The subject-predicate-object pattern express facts as semantic triples or statements.  This pattern is foundational for SPARQL-enabled (SPARQL Protocol and RDF Query Language) analytic and machine learning algorithms consuming large aggregations of facts from various sources.
+  1. further clarify a data component's representation
+  2. associate a data component's relationship to other data components. 
 
-####Context-Within-Context
-Context-within-context is a data chunk containing its own relevant contextual content.  In other words, a data chunk that describes its contextual meaning to interested consumers.  The SOI Track data model enables context-within-context with RDFa XML attributes for each data component.  
+Contextual content may be derived from a data component's element name and position in the XML tree.  In addition, contextual content may be enriched by meta-data components set at run-time with contextual values.  Meta-data components, many times, are only represented for larger, more general concepts and not their contained smaller, more specific concepts.  For some flexibility, larger, more general concepts may have general meta-data components that may provide enrichment to its smaller, more specific concepts.  However, this approach places context for the smaller, more specific concepts outside their context.  This approach may also duplicate data, create irrelevant dependencies, and add complexities.
 
-The SOI Track data model RDFa attributes promote interoperability based on these principles:
+The SOI Track data model enables context-within-context with RDFa data components.  RDFa (Resource Description Framework in Attributes)[https://en.wikipedia.org/wiki/RDFa] is a W3C Recommendation that defines a set of attribute-level data components for linking and expressing facts about data.  The set of attributes map to the W3C RDF data-model, thereby, enabling the embedding of RDF subject-predicate-object expressions within an XML document.  The subject-predicate-object pattern express facts as semantic triples or statements.  This pattern is foundational for SPARQL-enabled (SPARQL Protocol and RDF Query Language) analytic and machine learning algorithms consuming large aggregations of facts from various sources.
+
+The SOI Track data model represents RDFa meta-data components for each of its data components.  Each data component may have context enrichments with their context.  This context-within-context design approach meets the following interoperability design principles and enables their benefits:
 
   * autonomy - data chunk may exist independently
   * self-containment - data chunk may be represented as a whole
@@ -23,55 +63,55 @@ The SOI Track data model RDFa attributes promote interoperability based on these
   * modularity - data chunk is re-useable
   * evolvability - data chunk may change
   
-RDFa XML attributes containing well-defined semantic and de-referencable URL values can meet the above principles for data chunks.
+The SOI Track data model RDFa meta-data components also enable Linked Data.
 
 ###Linked Data
-Linked Data is enabled by the RDFa components.  Linked Data can refer to data instances associated to other data instances in a way that can be read automatically by computers.  Computers evaluate the descriptive links and interpret them for context.  It's analogous to what we do as humans when we evaluate a webpage link in a document and decide whether to follow the link to get more context about the topic.
+(Linked Data)[https://en.wikipedia.org/wiki/Linked_data] is also enabled by the RDFa meta-data components.  RDFa meta-data components set with semantic and de-referencable URL values are key to interlinking data chunks in a way that can be read automatically by computers.  Computers evaluate the descriptive links and interpret them for context.  It's analogous to what we do as humans when we evaluate a webpage link in a document and decide whether to follow the link to get more context about the topic.
 
-###Example Instance
+##Example Instance
 The following example depicts a simplified instance that is represented by a tree:
 
 	SOI-Track
 	  |
-	  `-- MilitaryUnit (id="//MilitaryUnit/001" 
-    |       rdfa:rel="hasObservation hasObservation observedBy" rdfa:href="//Position/001 //Kinetic/001 //Sensor/001")
+	  `-- MilitaryUnit (id="MilitaryUnit/001" 
+    |       rdfa:rel="hasObservation hasObservation observedBy" rdfa:href="Position/001 Kinetic/001 Sensor/001")
 	  |
-	  `-- Platform (id="//Platform/001" 
-    |       rdfa:rel="hasObservation observedBy" rdfa:href="//Position/002 //Sensor/001")
+	  `-- Platform (id="Platform/001" 
+    |       rdfa:rel="hasObservation observedBy" rdfa:href="Position/002 Sensor/001")
 	  |
-	  `-- Missile (id="//Missile/001" 
-    |       rdfa:rel="hasObservation observedBy" rdfa:href="//Position/003 //Sensor/001")
+	  `-- Missile (id="Missile/001" 
+    |       rdfa:rel="hasObservation observedBy" rdfa:href="Position/003 Sensor/001")
 	  |
-	  `-- PositionCollection (id="//Position/001" 
-          |   rdfa:about="//MilitaryUnit/001" rdfa:rel="bySensor" rdfa:href="//Sensor/001")
+	  `-- PositionCollection (id="Position/001" 
+          |   rdfa:about="MilitaryUnit/001" rdfa:rel="bySensor" rdfa:href="Sensor/001")
 	  |     |
-	  |     `-- PositionEclipse (id="//Position/001/PositionEclipse/001")
+	  |     `-- PositionEclipse (id="Position/001/PositionEclipse/001")
 	  |     |
-	  |     `-- PositionEclipse (id="//Position/001/PositionEclipse/002")
+	  |     `-- PositionEclipse (id="Position/001/PositionEclipse/002")
 	  |
-	  `-- PositionCollection (id="//Position/002" 
-    |     |   rdfa:about="//Platform/001" rdfa:rel="bySensor" rdfa:href="//Sensor/002")
+	  `-- PositionCollection (id="Position/002" 
+    |     |   rdfa:about="Platform/001" rdfa:rel="bySensor" rdfa:href="Sensor/002")
 	  |     |
-	  |     `-- PositionEclipse (id="//Position/002/PositionEclipse/001")
+	  |     `-- PositionEclipse (id="Position/002/PositionEclipse/001")
 	  |
-	  `-- PositionCollection (id="//Position/003" 
-    |     |   rdfa:about="//Missile/001" rdfa:rel="bySensor" rdfa:href="//Sensor/003")
+	  `-- PositionCollection (id="Position/003" 
+    |     |   rdfa:about="Missile/001" rdfa:rel="bySensor" rdfa:href="Sensor/003")
 	  |     |
-	  |     `-- PositionEclipse (id="//Position/003/PositionEclipse/001")
+	  |     `-- PositionEclipse (id="Position/003/PositionEclipse/001")
 	  |
-	  `-- KineticCollection (id="//Kinetic/001" 
-    |     |   rdfa:about="//MilitaryUnit/001" rdfa:rel="bySensor" rdfa:href="//Sensor/001")
+	  `-- KineticCollection (id="Kinetic/001" 
+    |     |   rdfa:about="MilitaryUnit/001" rdfa:rel="bySensor" rdfa:href="Sensor/001")
 	  |     |
-	  |     `-- KineticBearing (id="//Kinetic/001/KineticBearing/001")
+	  |     `-- KineticBearing (id="Kinetic/001/KineticBearing/001")
  	  |
-	  `-- Sensor (id="//Sensor/001" 
-    |       rdfa:rel="hasObservation hasObserved" rdfa:href="//Position/003 //MilitaryUnit/001")
+	  `-- Sensor (id="Sensor/001" 
+    |       rdfa:rel="hasObservation hasObserved" rdfa:href="Position/003 MilitaryUnit/001")
  	  |
-	  `-- Sensor (id="//Sensor/002"
-    |       rdfa:rel="hasObservation hasObserved" rdfa:href="//Position/002 //Platform/001")
+	  `-- Sensor (id="Sensor/002"
+    |       rdfa:rel="hasObservation hasObserved" rdfa:href="Position/002 Platform/001")
 	  |
-	  `-- Sensor (id="//Sensor/003"
-            rdfa:rel="hasObservation hasObserved" rdfa:href="//Position/003 //Missile/001")
+	  `-- Sensor (id="Sensor/003"
+            rdfa:rel="hasObservation hasObserved" rdfa:href="Position/003 Missile/001")
 
 The data format model represented above is fairly flat.  However, a deep and broad logical directional graph data model is formed when data components are linked by descriptive associations.  The image below depicts the directional graph data model for the above instance:
 
@@ -79,8 +119,8 @@ The data format model represented above is fairly flat.  However, a deep and bro
 example-simplified-instance-directional-graph-data-model_006.PNG
 
 
-###Flatter vs Deeper Rational
-The SOI Track data type purposely deviates from the deep tree representation common in many XML document formats.  The rational is that deeply formatted tree graphs in practice 1) complicate algorithms rather than simplify them and 2) constrain implementations rather then facilitate them.  Flatter formats are simply easier and lighter to process, and more flexible and adaptable for use case implementions.
+##Flatter vs Deeper
+The SOI Track data type deviates from the deep tree representation of many XML document formats.  The reason is that a flatter data format is simply easier and lighter to process in many cases.  Furthermore, a flatter data format is more flexible and adaptable to use case implementions.  
 
 For example, consider the following simple abstract data format model:
 
@@ -94,13 +134,17 @@ For example, consider the following simple abstract data format model:
 			
 Based on this data format model, a typical sequence to process an observation act may be described as follows:
 
+```
   for each ObservedThing, 
 	  do ObservedThing, ObservationResults, and Sensors.
+```
 
 A typical sequence to process only sensors may be described as follows:
 
+```
   for each ObservedThing, 
 	  do Sensors.
+```
 
 Notice that each ObservedThing is transversed to obtain and process sensors.
 
@@ -116,11 +160,15 @@ For contrast, we have the following flatter data format modeled with three first
 
 Based on this data format model, a typical sequence to process an observation act may be described as follows:
 
+```
   do ObservedThings, ObservationResults, and Sensors.
+```
 
 A typical sequence to process only sensors may be described as follows:
 
+```
   do Sensors
+```
 
 Although this is a basic example, notice how much simplier and lighter it is to process only sensors?  Since Sensor is a first-class data component, sensors may be processed exclusively and discretely.  The involvement of irrelevant data component trees is mitigated. 
 
@@ -128,7 +176,9 @@ The flatter data format is not only simplier and lighter, it is also more flexib
 
 Let's say another use case is to only process recent observation results, the sequence of steps may be described as follows:
 
+```
   for each [ObservationResult] do [ObservationResult] if timestamp > 2 hours ago )
+```
 
 Since ObservationResult is also a first-class data component, observation results may also be processed exclusively and discretely.  
 
@@ -450,7 +500,14 @@ Observation is an abstract data component for collections of observation results
 ##Flatter Than Deeper
  
 
-oncepts are The rational for this approach is that a flat data model is simplier and more efficient to process than a deep data model.  Algorithms that process a flat data model are typically simplier and more discrete.  This terseness provides opportunities for optimization both , and their processing cycle is optimizable because of repetition.
+oncepts are The rational for this approach is that a flat data model is simplier and more efficient to process than a deep data model.  Algorithms that process a flat data model are typically simplier and more discrete.  
+
+This terseness provides opportunities for optimization. 
+ processing cycle is optimizable because of repetition.
+
+Algorithms that process a flat data model are  simplier and more discrete.
+
+deeply formatted tree graphs in practice 1) complicate algorithms rather than simplify them and 2) constrain implementations rather then facilitate them.
 
 The data model is flatter by the inclusion of first-class specializations and properties at the same node level in the graph tree as their associated generalizations.  For example, observation results are at the same node level in the graph tree as their associated higher order entity and activity generalizations.
 
