@@ -14,48 +14,54 @@ The SOI Track data model represents 3 top-level, first-class concepts:
     :  ObservedThing  :    :  Observation  :    :  Sensor  :
      .................      ...............      ..........
 ```
-ObservedThings, Observations, Sensors are abstract data components with multiple representations:
+ObservedThing, Observation, and Sensor are abstract data components with multiple representations:
 ```
-          ..............................
-         :         Observed-Thing       :
-          ..............................
-           ^            ^             ^
-           |            |             |
-    /--------\    /------------\    /-----------------------\
-    |  Unit  |    |  Platform  |    |  Civil Demonstration  |
-    \--------/    \------------/    \-----------------------/
-    
+             ..............................
+            :         Observed-Thing       :
+             ..............................
+              ^            ^             ^
+              |            |             |
+       /--------\    /------------\    /-----------------------\
+       |  Unit  |    |  Platform  |    |  Civil Demonstration  |
+       \--------/    \------------/    \-----------------------/
+```
+```    
               .............................
              :         Observation         :
               .............................
-               ^            ^            ^
-               |            |            |
-    /------------\    /-----------\    /---------------\
-    |  Position  |    |  Kinetic  |    |  Temperature  |
-    \------------/    \-----------/    \---------------/
-
-          ..............................
-         :           Sensor             :
-          ..............................
-           ^            ^             ^
-           |            |             |
-    /--------\    /------------\    /--------------\
-    |  Unit  |    |  Platform  |    |  Instrument  |
-    \--------/    \------------/    \--------------/
+               ^           ^            ^
+               |           |            |
+    /------------\    /----------\    /---------------\
+    |  Position  |    |  Motion  |    |  Temperature  |
+    \------------/    \----------/    \---------------/
+```
+```
+             ..............................
+            :           Sensor             :
+             ..............................
+              ^            ^             ^
+              |            |             |
+       /--------\    /------------\    /--------------\
+       |  Unit  |    |  Platform  |    |  Instrument  |
+       \--------/    \------------/    \--------------/
 ```
 ##Context-Within-Context
-Context-within-context is a design approach that enables the containment of contextual content within the data component it enriches.  
+Context-within-context is a design approach that enables the containment of meta-data within a data component.  
 
-Contextual content is information about a data component's instance.  For example, contextual content may 
+Meta-data includes contextual content about a data component's instance.  The contextual content may 
 
-  1. further clarify a data component's representation
-  2. associate a data component's relationship to other data components. 
+  1. clarify a data component's content
+  2. identify and associate a data component's relationship to other data components. 
 
-Contextual content may be derived from a data component's element name and position in the XML tree.  In addition, contextual content may be enriched by meta-data components set at run-time with contextual values.  Meta-data components, many times, are only represented for larger, more general concepts and not their contained smaller, more specific concepts.  For some flexibility, larger, more general concepts may have general meta-data components that may provide enrichment to its smaller, more specific concepts.  However, this approach places context for the smaller, more specific concepts outside their context.  This approach may also duplicate data, create irrelevant dependencies, and add complexities.
+The name and location of a data component in an XML tree instance should provide context.  Furthermore, contextual content may be enriched by meta-data components set at run-time with contextual values.  
 
-The SOI Track data model enables context-within-context with RDFa data components.  RDFa (Resource Description Framework in Attributes)[https://en.wikipedia.org/wiki/RDFa] is a W3C Recommendation that defines a set of attribute-level data components for linking and expressing facts about data.  The set of attributes map to the W3C RDF data-model, thereby, enabling the embedding of RDF subject-predicate-object expressions within an XML document.  The subject-predicate-object pattern express facts as semantic triples or statements.  This pattern is foundational for SPARQL-enabled (SPARQL Protocol and RDF Query Language) analytic and machine learning algorithms consuming large aggregations of facts from various sources.
+Many times meta-data components are often represented for larger, more general concepts but not their contained smaller, more specific concepts.  And, the larger, more general concepts may include some general meta-data components for the enrichment of its smaller, more specific concepts.  However, this approach places the meta-data for the smaller, more specific concepts outside their context.  This approach may result in the duplication of data, irrelevant dependencies, and wasteful complexities.
 
-The SOI Track data model represents RDFa meta-data components for each of its data components.  Each data component may have context enrichments with their context.  This context-within-context design approach meets the following interoperability design principles and enables their benefits:
+The SOI Track data model enables context-within-context, the containment of meta-data within a data component, through RDFa data components.  RDFa (Resource Description Framework in Attributes)[https://en.wikipedia.org/wiki/RDFa] is a W3C Recommendation that defines a set of attribute-level data components for linking and expressing facts about data.  The set of attributes map to the W3C RDF data-model, thereby, enabling the embedding of RDF subject-predicate-object expressions within an XML document.  
+
+The subject-predicate-object pattern express facts as semantic triples or statements.  For example, `Military_unit-observed_by-sensor`. The triple pattern is foundational for W3C SPARQL-enabled (SPARQL Protocol and RDF Query Language)[https://en.wikipedia.org/wiki/SPARQL] analytic and machine learning algorithms consuming large aggregations of facts from various sources.
+
+The SOI Track data model represents RDFa components for each of its data components.  Each data component may have context enrichments with their context.  This context-within-context design approach meets the following interoperability design principles and enables their benefits:
 
   * autonomy - data chunk may exist independently
   * self-containment - data chunk may be represented as a whole
@@ -63,14 +69,20 @@ The SOI Track data model represents RDFa meta-data components for each of its da
   * modularity - data chunk is re-useable
   * evolvability - data chunk may change
   
-The SOI Track data model RDFa meta-data components also enable Linked Data.
+The SOI Track data model RDFa components also enable Linked Data.
 
 ###Linked Data
-(Linked Data)[https://en.wikipedia.org/wiki/Linked_data] is also enabled by the RDFa meta-data components.  RDFa meta-data components set with semantic and de-referencable URL values are key to interlinking data chunks in a way that can be read automatically by computers.  Computers evaluate the descriptive links and interpret them for context.  It's analogous to what we do as humans when we evaluate a webpage link in a document and decide whether to follow the link to get more context about the topic.
+(Linked Data)[https://en.wikipedia.org/wiki/Linked_data] is data linked to other data by de-referencable URL values.  What this simply means is that a URL value is supplied to locate contextual or related information.  
+
+The de-referencable URL values are then available for computers to evaluate and interpret.  It's analogous to what we do as humans when we evaluate a webpage link in a document and decide whether to follow the link to get more context about a topic.  For example, you have the opportunity to get more context about linked data by watching the following 15 minute video: 
+
+[What is Linked Data?](https://www.youtube.com/watch?v=4x_xzT5eF5Q).
+
+The SOI Track data model implements RDFa components to enable Linked Data.  RDFa components set with semantic and de-referencable URL values may be used to interlink data chunks in a way that can be evaluated and interpreted automatically by computers.  
 
 ##Example Instance
 The following example depicts a simplified instance that is represented by a tree:
-
+```
 	SOI-Track
 	  |
 	  `-- MilitaryUnit (id="MilitaryUnit/001" 
@@ -112,15 +124,16 @@ The following example depicts a simplified instance that is represented by a tre
 	  |
 	  `-- Sensor (id="Sensor/003"
             rdfa:rel="hasObservation hasObserved" rdfa:href="Position/003 Missile/001")
+```
+As a data format, the instance represented above is fairly flat.  However, as a logical data model, the instance is deep and broad.  The instance implements the RDFa components to link related data components, forming a directional or network graph.  
 
-The data format model represented above is fairly flat.  However, a deep and broad logical directional graph data model is formed when data components are linked by descriptive associations.  The image below depicts the directional graph data model for the above instance:
+The image below depicts the network graph data model represented by the above instance:
 
 ![network graph image created by https://github.com/apcj/arrows](example-simplified-instance-directional-graph-data-model_006.PNG)
 example-simplified-instance-directional-graph-data-model_006.PNG
 
-
 ##Flatter vs Deeper
-The SOI Track data type deviates from the deep tree representation of many XML document formats.  The reason is that a flatter data format is simply easier and lighter to process in many cases.  Furthermore, a flatter data format is more flexible and adaptable to use case implementions.  
+The SOI Track data type deviates from the deep tree representation of many XML document formats.  The reason is that, in many cases, a flatter data format is simply easier and lighter to process.  Furthermore, a flatter data format is more flexible and adaptable to use case implementions.  
 
 For example, consider the following simple abstract data format model:
 
