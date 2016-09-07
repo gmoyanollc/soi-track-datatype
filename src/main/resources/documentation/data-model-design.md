@@ -17,7 +17,7 @@ The SOI Track data model represents 3 top-level, first-class concepts:
 ObservedThing, Observation, and Sensor are abstract data components with multiple representations:
 ```
              ..............................
-            :         Observed-Thing       :
+            :         ObservedThing       :
              ..............................
               ^            ^             ^
               |            |             |
@@ -45,6 +45,13 @@ ObservedThing, Observation, and Sensor are abstract data components with multipl
        |  Unit  |    |  Platform  |    |  Instrument  |
        \--------/    \------------/    \--------------/
 ```
+
+ObservedThing is a placeholder for entities and activites subject to observation acts.  For example, military units.  Each MilitaryUnit component contains characteristics assigned to that military unit, such as organizational affiliation.
+
+Observation is a placeholder for collections of observation results.  Each collection contains observation results of the same type.  For example, a Position collection may contain estimated geospatial coordinates at discrete time instances for an ObservedThing or Sensor.  A Motion collection may contain estimated speed and bearing.
+
+Sensor is a placeholder for collections of entities, instruments, algorithms and process chains.  For example, an Instrument component contains characteristics assigned to that instrument, such as its model and mounted platform.
+
 ##Context-Within-Context
 Context-within-context is a design approach that enables the containment of meta-data within a data component.  
 
@@ -57,11 +64,15 @@ The name and location of a data component in an XML tree instance should provide
 
 Many times meta-data components are often represented for larger, more general concepts but not their contained smaller, more specific concepts.  And, the larger, more general concepts may include some general meta-data components for the enrichment of its smaller, more specific concepts.  However, this approach places the meta-data for the smaller, more specific concepts outside their context.  This approach may result in the duplication of data, irrelevant dependencies, and wasteful complexities.
 
-The SOI Track data model enables context-within-context, the containment of meta-data within a data component, through RDFa data components.  RDFa (Resource Description Framework in Attributes)[https://en.wikipedia.org/wiki/RDFa] is a W3C Recommendation that defines a set of attribute-level data components for linking and expressing facts about data.  The set of attributes map to the W3C RDF data-model, thereby, enabling the embedding of RDF subject-predicate-object expressions within an XML document.  
+The SOI Track data model enables context-within-context, the containment of meta-data within a data component, through RDFa data components.  RDFa (Resource Description Framework in Attributes)[https://en.wikipedia.org/wiki/RDFa] is a W3C Recommendation that defines a set of attribute-level data components for linking and expressing facts about data.  The set of attributes map to the W3C RDF data-model, thereby, enabling the embedding of RDF subject-predicate-object expressions within an XML document. 
+ 
+###Semantic Triple
+The subject-predicate-object pattern expresses facts as semantic triples or statements.  For example, `Sensor/001 hasObserved MilitaryUnit/001` and `MilitaryUnit/001 hasObservation  Position/001`. 
 
-The subject-predicate-object pattern express facts as semantic triples or statements.  For example, `Military_unit-observed_by-sensor`. The triple pattern is foundational for W3C SPARQL-enabled (SPARQL Protocol and RDF Query Language)[https://en.wikipedia.org/wiki/SPARQL] analytic and machine learning algorithms consuming large aggregations of facts from various sources.
+The triple pattern is foundational for W3C SPARQL-enabled (SPARQL Protocol and RDF Query Language)[https://en.wikipedia.org/wiki/SPARQL] analytic and machine learning algorithms consuming large aggregations of facts from various sources.
 
-The SOI Track data model represents RDFa components for each of its data components.  Each data component may have context enrichments with their context.  This context-within-context design approach meets the following interoperability design principles and enables their benefits:
+###Design Principles
+The SOI Track data model represents RDFa components for each of its data components.  Each data component may have context enrichments with their context.  This context-within-context design approach meets the following interoperability design principles and their consequentual benefits:
 
   * autonomy - data chunk may exist independently
   * self-containment - data chunk may be represented as a whole
@@ -197,7 +208,7 @@ Since ObservationResult is also a first-class data component, observation result
 
 Therefore, the SOI Track data type purposely deviates from the deep tree representation common in many XML document formats.  The rational is that flatter formats are simplier and lighter for processing, and more flexible and adaptable for use case implementation.
 
-###end
+###end of content
  
 <!-- 0.6 -->
 
@@ -456,125 +467,3 @@ CREATE
 
 //
 //
-
-
-	SOI-Track
-	  |
-	  `-- ObservedThingAbstract (platform, military unit, missile)
-	  |
-	  `-- ObservationResultAbstract (position, kinetic, temperature)
-	  |
-	  `-- Sensor
-
-Example instance:
-
-	SOI-Track
-	  |
-	  `-- MilitaryUnit (id="//MilitaryUnit/001" rdfa:rel="hasObservation" rdfa:href="//Position/position-001" timestamp="2016/07/23 06:40:14")
-	  |
-	  `-- Platform (id="//Platform/001" positionId="//Position/position-002" affiliation="USA")
-	  |
-	  `-- Missile (id="//Missile/001" positionId="//Position/position-003" affiliation="USA")
-	  |
-	  `-- Position (id="//Position/001" refDateTime="2016/07/23 06:40:26")
-	  |     |
-	  |     `-- PositionEclipse (id="position-eclipse-001" positionId="position-001" latitude="12.9061" longitude="53.0385" timestamp="2016/07/23 06:40:26")
-	  |
-	  `-- Kinetic
-	  |     |
-	  |     `-- KineticBearing (id="" bearing="108" speed="110" timestamp="2016/07/23 06:40:14")
-	  |
-	  `-- Sensor (id="sensor-001" make="Grummen" model="SVT-0935")
-	  
-
-ObservedThingAbstract is a placeholder for entities and activites subject to observation acts.  For example, military units in an area of interest may be listed.  Each military unit component contains characteristics assigned to that military unit, such as organizational affiliation.
-
-
-
-SensorCollection contains sensors, instruments, algorithms and process chains.  For example, a sensor component contains characteristics assigned to that sensor, such as identifiers for its make and model.
-
-	SOI-Track
-
-
-Observation is an abstract data component for collections of observation results.  Each collection contains observation results of the same type and their properties.  For example, a position collection may contain estimated geospatial coordinates at discrete time instances.  A kinetic collection may contain estimated speed and bearing at discrete time instances.
-
-	SOI-Track
-	  |
-	  `-- PositionCollection
-	  |     |
-	  |     `-- PositionEclipse (latitude="12.9061" longitude="53.0385" timestamp="2016/07/23 06:40:26")
-	  |
-	  `-- KineticCollection
-	  |     |
-	  |     `-- Kinetic (bearing="108" speed="110" timestamp="2016/07/23 06:40:14")
-	  |
-	  `-- TemperatureCollection
-
-##Flatter Than Deeper
- 
-
-oncepts are The rational for this approach is that a flat data model is simplier and more efficient to process than a deep data model.  Algorithms that process a flat data model are typically simplier and more discrete.  
-
-This terseness provides opportunities for optimization. 
- processing cycle is optimizable because of repetition.
-
-Algorithms that process a flat data model are  simplier and more discrete.
-
-deeply formatted tree graphs in practice 1) complicate algorithms rather than simplify them and 2) constrain implementations rather then facilitate them.
-
-The data model is flatter by the inclusion of first-class specializations and properties at the same node level in the graph tree as their associated generalizations.  For example, observation results are at the same node level in the graph tree as their associated higher order entity and activity generalizations.
-
-Furthermore, the SOI Track data model is flatter by being more concise than descriptive in its representation.  For example, specialized data components are substituted at the same node level as other specializations rather than transversed into specialized node levels.
-
-
-	<Unit>
-	
-
-		<Location>
-			<Position ns:id="position01">
-				<LatLong>10 25</LatLong>
-			</Position>
-			<Position ns:id="position02">
-				<LatLong>10 25</LatLong>
-			</Position>
-
-		</Location>
-		<Sensor>
-			<Model>Grummen</Model>
-			<Result ns:ref="position01"/>
-			<Result ns:ref="position02"/>
-			<Position ns:id="position01">
-				<LatLong>10 25</LatLong>
-			</Position>
-			<Position ns:id="position02">
-				<LatLong>10 25</LatLong>
-			</Position>
-		</Sensor>
-	</Unit>
-
-		<Sensor>
-			<Model>Grummen</Model>
-			<Result ns:ref="position01"/>
-			<Result ns:ref="position02"/>
-			<Position ns:id="position01">
-				<LatLong>10 25</LatLong>
-			</Position>
-			<Position ns:id="position02">
-				<LatLong>10 25</LatLong>
-			</Position>
-		</Sensor>
-			
-The component ObservedThingAbstract acts as a placeholder.
-
-	SOI-Track
-	  |
-	  `-- ObservedThingAbstract (platform, military unit, missile)
-
-The component ObservationResultAbstract acts as a placeholder.
-
-	SOI-Track
-	  |
-	  `-- ObservedThingAbstract (platform, military unit, missile)
-	  |
-	  `-- ObservationResultAbstract (position, kinetic, temperature)
-
