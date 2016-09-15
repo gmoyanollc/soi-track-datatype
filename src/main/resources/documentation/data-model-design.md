@@ -1,15 +1,23 @@
 #Data Model Design
-The SOI Track data model design is best described by the following differentiating topics:
+The motivations behind this data model design are the following:
+
+  * demand for a simpler, flexible contract by heterogeneous end-points
+  * benefit of standardized contextual content to mitigate ambiguity and increase interoperability
+  * demand for a flatter data model that is easier and lighter to process and more flexible and adaptable to use-cases
+  * benefit of isolating generally stale data from fresh data
+  * benefit of documentation in generated Java Classes 
+
+The influence of these motivations is best described by the following differentiating topics:
 
   * First-Class Data Components
   * Linked-Data
-  * Context
+  * Contextual Metadata
   * RDFa
-  * Interoperability Design Principles
+  * Semantic Triples
+  * Interoperable Data Nodes
   * Example Instance
   * Flatter vs. Deeper
   
-
 ##First-Class Data Components
 The SOI Track data model represents 3 top-level, first-class concepts:
 ```
@@ -49,47 +57,60 @@ ObservedThing, Observation, and Sensor are abstract data components with multipl
        \--------/    \------------/    \--------------/
 ```
 
-ObservedThing is a placeholder for entities and activites subject to observation acts.  For example, military units.  Each MilitaryUnit component contains characteristics assigned to that military unit, such as organizational affiliation.
+ObservedThing is a placeholder for entities and activities subject to observation acts.  For example, military units.  Each MilitaryUnit component contains characteristics assigned to that military unit, such as organizational affiliation.
 
-Observation is a placeholder for collections of observation results.  Each collection contains observation results of the same type.  For example, a Position collection may contain estimated geospatial coordinates at discrete time instances for an ObservedThing or Sensor.  A Motion collection may contain estimated speed and bearing.
+Observation is a placeholder for collections of observation results.  Each collection contains observation results of the same type.  For example, a Position collection may contain estimated geo-spatial coordinates at discrete time instances for an ObservedThing or Sensor.  A Motion collection may contain estimated speed and bearing.
 
 Sensor is a placeholder for collections of entities, instruments, algorithms and process chains.  For example, an Instrument component contains characteristics assigned to that instrument, such as its model and mounted platform.
 
 ##Linked Data
-[Linked Data](https://en.wikipedia.org/wiki/Linked_data) is an approach to naming things, relations, and concepts using de-referenceable HTTP URLs.  De-referenceable URLs are then available for computers to evaluate and interpret for context and associated information.  Therefore, the URLs create a network of standards-based machine interpretable data across different documents and HTTP services.
+[Linked Data](https://en.wikipedia.org/wiki/Linked_data) is an approach to naming things, relations, and concepts using de-referenceable HTTP URLs.  De-referenceable URLs are then available for computers to evaluate and interpret for meaning, context, and associated data.  The URLs create a network of standards-based machine-interpretable data across different documents and HTTP services.
 
-It's analogous to what we do as humans when we evaluate a webpage link in a document and decide whether to follow the link to get more context or related information about a topic.  For example, the following 15 minute video provides more context about linked data: 
+It's analogous to what we do as humans when we evaluate a web-page link in a document and decide whether to follow the link to get more context or related information about a topic.  For example, the following 15 minute video provides more context about linked data: 
 
 [What is Linked Data?](https://www.youtube.com/watch?v=4x_xzT5eF5Q).
 
-The SOI Track data model implements RDFa components to enable Linked Data.  The RDFa components may be set with semantic and de-referenceable URL values to name things, provide additional context, and assert associations.  De-referenceable URLs provide a way for the evaluation and interpretion by computers for more context and related information. 
+The SOI Track data model implements RDFa components to enable Linked Data.  The RDFa components may be set with semantic and de-referenceable URL values to name things, provide additional context, and assert associations.  De-referenceable URLs provide a way for the evaluation and interpretation by computers for more context and related information.  
 
-##Context
+[Google Structured Data](https://developers.google.com/search/docs/guides/intro-structured-data) implements RDFa to 
+link data and make content eligible for Google Search features such as Rich Cards, Breadcrumbs, Sitelinks Search Box, and Knowledge Graph cards.
+
+Facebook’s OGP [Open Graph Protocol](http://ogp.me/) implements RDFa to link data and turn web pages into graph objects.  OGP “enables any web page to become a rich object in a social graph”, having “the same functionality as any other object on Facebook.”
+
+###What's in it for SOI?
+A start for SOI may be to first define basic metadata vocabulary, following Facebook's approach with OGP.  Second, the basic metadata may be implemented by TSOA endpoints to produce nodes in a SOI network graph datastore.  And, last, the network graph datastore is searchable by the TSOA community to produce direct hits into the SOI Information Object Repository with record-ids. 
+
+##Contextual Metadata
 A data component's meta-data provides context for an instance.  It's contextual content may 
 
-  1. clarify a data component's content
-  2. identify and associate a data component's relationship to other data components. 
+  1. clarify a data component's content: `ObservedThing/001 isA activity/patrol`
+  2. identify and associate a data component's relationship to other data components: 'Sensor/001 hasObserved MilitaryUnit/001'. 
  
-Many times meta-data components are represented for larger, more general concepts.  But, smaller, more specific concepts, contained by larger, more general representations, often times od not have meta-data components.  As a work-around, the larger, more general representations may provide a way to enrich their smaller, more specific representations.  However, this approach may duplicate data, create irrelevant dependencies, and add wasteful complexities.  
+The SOI Track data model represents meta-data components for all data components, regardless of their specificity.  Many times meta-data components are represented for larger, more general concepts.  But, smaller, more specific concepts, contained by larger, more general representations, often times do not have meta-data components.  As a work-around, the larger, more general representations may provide a way to enrich their smaller, more specific representations.  However, this approach may duplicate data, create irrelevant dependencies, and add wasteful complexities. 
 
-The SOI Track data model represents meta-data components for all data components, regardless of their specificity.  RDFa data components are inherent to each data component described by the SOI Track data model. 
+The placement of contextual metadata within a node's context follows best-practice design principles for interoperability:
+
+  * autonomy - may exist independently
+  * self-containment - may be represented as a whole
+  * re-use - values are not duplicated
+  * modularity - may be re-used
+  * evolvability - may change 
+  
+The SOI Track data model implements RDFa as its meta-data components.  RDFa data components are inherent to each data component described by the SOI Track data model.
 
 ##RDFa 
 RDFa [Resource Description Framework in Attributes](https://en.wikipedia.org/wiki/RDFa) is a W3C Recommendation that defines a set of attribute-level data components for linking and expressing facts about data.  The set of attributes map to the W3C RDF data-model, thereby, enabling the embedding of RDF subject-predicate-object expressions within an XML document. 
+
+[Google Structured Data](https://developers.google.com/search/docs/guides/intro-structured-data) specifies the usage of RDFa to make content eligible for Google Search features such as Rich Cards, Breadcrumbs, Sitelinks Search Box, and Knowledge Graph cards.
+
+Facebook’s [Open Graph Protocol](http://ogp.me/) implements RDFa to turn web pages into graph objects.  OGP “enables any web page to become a rich object in a social graph”, having “the same functionality as any other object on Facebook.”
+
+Facts expressed in a subject-predicate-object pattern are also known as triples.
  
 ##Semantic Triples
-The subject-predicate-object pattern expresses facts as semantic triples or statements.  For example, `Sensor/001 hasObserved MilitaryUnit/001` and `MilitaryUnit/001 hasObservation  Position/001`. 
+Semantic triples are expressions in a subject-predicate-object pattern that define intended structure and meaning.  For example, `Sensor/001 hasObserved MilitaryUnit/001` and `MilitaryUnit/001 hasObservation Position/001`.
 
-The triple pattern is foundational for W3C SPARQL-enabled [SPARQL Protocol and RDF Query Language](https://en.wikipedia.org/wiki/SPARQL) analytic and machine learning algorithms consuming large aggregations of facts from various sources.
-
-###Interoperability Design Principles
-Since each data component is represented with metadata components, regardless of its specificity, each component instance may have its own contextual enrichments.  Having contextual metadata within the context of a data component instance follows best-practice design principles that yield practical interoperability results:
-
-  * autonomy - data chunk may exist independently
-  * self-containment - data chunk may be represented as a whole
-  * re-use - data chunk values are not duplicated
-  * modularity - data chunk is re-useable
-  * evolvability - data chunk may change
+The triple pattern is foundational for W3C SPARQL-enabled [SPARQL Protocol and RDF Query Language](https://en.wikipedia.org/wiki/SPARQL) analytic and machine learning algorithms.  Several algorithms are able to consume large aggregations of triples from various sources.
 
 ##Example Instance
 The following example depicts a simplified instance that is represented by a tree:
@@ -144,7 +165,7 @@ The image below depicts the network graph data model represented by the above in
 example-simplified-instance-directional-graph-data-model_006.PNG
 
 ##Flatter vs Deeper
-The SOI Track data type deviates from the deep tree representation of many XML document formats.  The reason is that, in many cases, a flatter data format is simply easier and lighter to process.  Furthermore, a flatter data format is more flexible and adaptable to use case implementions.  
+The SOI Track data type deviates from the deep tree representation of many XML document formats.  The reason is that, in many cases, a flatter data format is simply easier and lighter to process (smaller stack, less objects).  Furthermore, a flatter data format is more flexible and adaptable to use-cases.  
 
 For example, consider the following simple abstract data format model:
 ```
@@ -194,9 +215,9 @@ A typical sequence to process only sensors may be described as follows:
   do Sensors
 ```
 
-Although this is a basic example, notice how much simplier and lighter it is to process only sensors?  Since Sensor is a first-class data component, sensors may be processed exclusively and discretely.  The involvement of irrelevant data component trees is mitigated. 
+Although this is a basic example, notice how much simpler and lighter it is to process only sensors?  Since Sensor is a first-class data component, sensors may be processed exclusively and discretely.  The involvement of irrelevant data component trees is mitigated. 
 
-The flatter data format is not only simplier and lighter, it is also more flexible and adaptable.
+The flatter data format is not only simpler and lighter, it is also more flexible and adaptable.
 
 Let's say another use case is to only process recent observation results, the sequence of steps may be described as follows:
 
@@ -206,7 +227,9 @@ Let's say another use case is to only process recent observation results, the se
 
 Since ObservationResult is also a first-class data component, observation results may also be processed exclusively and discretely.  
 
-Therefore, the SOI Track data type purposely deviates from the deep tree representation common in many XML document formats.  The rational is that flatter formats are simplier and lighter for processing, and more flexible and adaptable for use case implementation.
+Therefore, the SOI Track data type purposely deviates from the deep tree representation common in many XML document formats.  The rational is that flatter formats are simpler and lighter for processing, and more flexible and adaptable to use-cases.  
+
+Last, but not the least, there are other significant reasons for a flatter data model and format.  For example, a flatter data format is friendlier for JSON transformations.  And, a flatter data model produces a smaller stack and less objects when processing, thereby improving memory requirements and overall performance.
 
 ###end of human content
  
