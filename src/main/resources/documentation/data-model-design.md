@@ -1,7 +1,7 @@
 #Data Model Design
 The motivations behind this data model design are the following:
 
-  * demand for a simpler, flexible contract by heterogeneous end-points
+  * demand for a simpler, more flexible contract for heterogeneous end-points
   * benefit of standardized contextual content to mitigate ambiguity and increase interoperability
   * demand for a flatter data model that is easier and lighter to process and more flexible and adaptable to use-cases
   * benefit of isolating generally stale data from fresh data
@@ -68,7 +68,7 @@ Sensor is a placeholder for collections of entities, instruments, algorithms and
 
 It's analogous to what we do as humans when we evaluate a web-page link in a document and decide whether to follow the link to get more context or related information about a topic.  For example, the following 15 minute video provides more context about linked data: 
 
-[What is Linked Data?](https://www.youtube.com/watch?v=4x_xzT5eF5Q).
+[What is Linked Data?](https://www.youtube.com/watch?v=4x_xzT5eF5Q)
 
 The SOI Track data model implements RDFa components to enable Linked Data.  The RDFa components may be set with semantic and de-referenceable URL values to name things, provide additional context, and assert associations.  De-referenceable URLs provide a way for the evaluation and interpretation by computers for more context and related information.  
 
@@ -78,13 +78,13 @@ link data and make content eligible for Google Search features such as Rich Card
 Facebook’s OGP [Open Graph Protocol](http://ogp.me/) implements RDFa to link data and turn web pages into graph objects.  OGP “enables any web page to become a rich object in a social graph”, having “the same functionality as any other object on Facebook.”
 
 ###What's in it for SOI?
-A start for SOI may be to first define basic metadata vocabulary, following Facebook's approach with OGP.  Second, the basic metadata may be implemented by TSOA endpoints to produce nodes in a SOI network graph datastore.  And, last, the network graph datastore is searchable by the TSOA community to produce direct hits into the SOI Information Object Repository with record-ids. 
+A start for SOI may be to first define basic metadata vocabulary, following Facebook's start with OGP.  Second, the basic metadata may be implemented by TSOA endpoints to produce nodes in a SOI network graph datastore.  And last, the network graph datastore is searchable by the TSOA community to produce direct hits into the SOI Information Object Repository with record-ids. 
 
 ##Contextual Metadata
 A data component's meta-data provides context for an instance.  It's contextual content may 
 
   1. clarify a data component's content: `ObservedThing/001 isA activity/patrol`
-  2. identify and associate a data component's relationship to other data components: 'Sensor/001 hasObserved MilitaryUnit/001'. 
+  2. identify and associate a data component's relationship to other data components: `Sensor/001 hasObserved MilitaryUnit/001`. 
  
 The SOI Track data model represents meta-data components for all data components, regardless of their specificity.  Many times meta-data components are represented for larger, more general concepts.  But, smaller, more specific concepts, contained by larger, more general representations, often times do not have meta-data components.  As a work-around, the larger, more general representations may provide a way to enrich their smaller, more specific representations.  However, this approach may duplicate data, create irrelevant dependencies, and add wasteful complexities. 
 
