@@ -77,8 +77,11 @@ link data and make content eligible for Google Search features such as Rich Card
 
 Facebook’s OGP [Open Graph Protocol](http://ogp.me/) implements RDFa to link data and turn web pages into graph objects.  OGP “enables any web page to become a rich object in a social graph”, having “the same functionality as any other object on Facebook.”
 
+###What's in it for TSOA?
+TSOA end-points are empowered to exchange their own agreed-upon metadata data components as Linked Data extensions to the SOI Track Datatype contract.
+
 ###What's in it for SOI?
-A start for SOI may be to first define basic metadata vocabulary, following Facebook's start with OGP.  Second, the basic metadata may be implemented by TSOA endpoints to produce nodes in a SOI network graph datastore.  And last, the network graph datastore is searchable by the TSOA community to produce direct hits into the SOI Information Object Repository with record-ids. 
+SOI may start with Linked Data by first defining basic metadata vocabulary, something like Facebook did with OGP.  Second, the basic metadata may be implemented by TSOA endpoints to produce nodes in a SOI network graph datastore.  And last, the network graph datastore is searchable by the TSOA community to produce direct hits into the SOI Information Object Repository using record-ids. 
 
 ##Contextual Metadata
 A data component's meta-data provides context for an instance.  It's contextual content may 
