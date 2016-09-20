@@ -4,7 +4,7 @@ SOI Track is a data type that represents concepts related to tracks, or more spe
 An observation act is an observation "associated with a discrete time instant or period through which results are assigned" to a thing-of-interest. The results are obtained by "a specified procedure, such as a sensor, instrument, algorithm or process chain" [OGC and ISO 19156:2011(E), [Observations and Measurements](https://en.wikipedia.org/wiki/Observations_and_Measurements)].  For example, `a military unit's location at discrete time intervals is observed by a platform sensor`.
 
 ##NIEM
-SOI Track Datatype 2.x meets the [National Information Exchange Model(NIEM)](https://www.niem.gov/aboutniem) [Naming and Design Rules 3.0 (NDR)](https://reference.niem.gov/niem/specification/naming-and-design-rules/3.0/niem-ndr-3.0.html) Schematron conformance rules and generally follows its guidelines.
+SOI Track Datatype 2.x meets the [National Information Exchange Model (NIEM)](https://www.niem.gov/aboutniem) [Naming and Design Rules 3.0 (NDR)](https://reference.niem.gov/niem/specification/naming-and-design-rules/3.0/niem-ndr-3.0.html) Schematron conformance rules and generally follows its guidelines.
 
 The following are notable deviations from NIEM NDR guidance:
 
