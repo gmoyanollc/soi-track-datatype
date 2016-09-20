@@ -21,15 +21,15 @@ The influence of these motivations is best described by the following differenti
 ##First-Class Data Components
 The SOI Track data model represents 3 top-level, first-class concepts:
 ```
-     .................      ...............      ..........
-    :  ObservedThing  :    :  Observation  :    :  Sensor  :
-     .................      ...............      ..........
+     .................      ...............      ..................
+    :  ObservedThing  :    :  Observation  :    :  ObservingThing  :
+     .................      ...............      ..................
 ```
 ObservedThing, Observation, and Sensor are abstract data components with multiple representations:
 ```
-             ..............................
+             .............................
             :         ObservedThing       :
-             ..............................
+             .............................
               ^            ^             ^
               |            |             |
        /--------\    /------------\    /-----------------------\
@@ -48,20 +48,20 @@ ObservedThing, Observation, and Sensor are abstract data components with multipl
 ```
 ```
              ..............................
-            :           Sensor             :
+            :        ObservingThing        :
              ..............................
               ^            ^             ^
               |            |             |
-       /--------\    /------------\    /--------------\
-       |  Unit  |    |  Platform  |    |  Instrument  |
-       \--------/    \------------/    \--------------/
+       /--------\     /----------\    /-------------\
+       |  Unit  |     |  Sensor  |    |  Algorithm  |
+       \--------/     \----------/    \-------------/
 ```
 
 ObservedThing is a placeholder for entities and activities subject to observation acts.  For example, military units.  Each MilitaryUnit component contains characteristics assigned to that military unit, such as organizational affiliation.
 
 Observation is a placeholder for collections of observation results.  Each collection contains observation results of the same type.  For example, a Position collection may contain estimated geo-spatial coordinates at discrete time instances for an ObservedThing or Sensor.  A Motion collection may contain estimated speed and bearing.
 
-Sensor is a placeholder for collections of entities, instruments, algorithms and process chains.  For example, an Instrument component contains characteristics assigned to that instrument, such as its model and mounted platform.
+ObservingThing is a placeholder for collections of entities, instruments, algorithms and process chains.  For example, an Instrument component contains characteristics assigned to that instrument, such as its model and mounted platform.
 
 ##Linked Data
 [Linked Data](https://en.wikipedia.org/wiki/Linked_data) is an approach to naming things, relations, and concepts using de-referenceable HTTP URLs.  De-referenceable URLs are then available for computers to evaluate and interpret for meaning, context, and associated data.  The URLs create a network of standards-based machine-interpretable data across different documents and HTTP services.
@@ -84,11 +84,28 @@ TSOA end-points are empowered to exchange their own agreed-upon metadata data co
 SOI may start with Linked Data by first defining basic metadata vocabulary, something like Facebook did with OGP.  Second, the basic metadata may be implemented by TSOA endpoints to produce nodes in a SOI network graph datastore.  And last, the network graph datastore is searchable by the TSOA community to produce direct hits into the SOI Information Object Repository using record-ids. 
 
 ##Contextual Metadata
-A data component's meta-data provides context for an instance.  It's contextual content may 
+Contextual metadata provides context for a data component instance.  The contextual metadata may: 
 
-  1. clarify a data component's content: `ObservedThing/001 isA activity/patrol`
-  2. identify and associate a data component's relationship to other data components: `Sensor/001 hasObserved MilitaryUnit/001`. 
- 
+  1. Clarify a data component's content.
+
+    For example, the following contextual metadata states that a military unit's classification is "Entity": 
+```
+  "http://mcsc.usmc.mil/mc2sa/tsoa/soi/track/2.0/soi-track/MilitaryUnit/idrootx2x0" 
+     |
+      `-- "http://schema.org/Class" 
+            |
+            `-- "http://www.w3.org/ns/prov#Entity".
+```
+  2. Associate a data component's relationship to other data components.
+
+    For example, the following states that a military unit is at a location by associating a military unit to a position: 
+```
+  "http://mcsc.usmc.mil/mc2sa/tsoa/soi/track/2.0/soi-track/MilitaryUnit/idrootx2x0"
+     |
+      `-- "http://www.w3.org/ns/prov#atLocation"
+            |
+            `-- "http://mcsc.usmc.mil/mc2sa/tsoa/soi/track/2.0/soi-track/Position/idrootx5x0". 
+```
 The SOI Track data model represents meta-data components for all data components, regardless of their specificity.  Many times meta-data components are represented for larger, more general concepts.  But, smaller, more specific concepts, contained by larger, more general representations, often times do not have meta-data components.  As a work-around, the larger, more general representations may provide a way to enrich their smaller, more specific representations.  However, this approach may duplicate data, create irrelevant dependencies, and add wasteful complexities. 
 
 The placement of contextual metadata within a node's context follows best-practice design principles for interoperability:
@@ -111,7 +128,7 @@ Facebook’s [Open Graph Protocol](http://ogp.me/) implements RDFa to turn web p
 Facts expressed in a subject-predicate-object pattern are also known as triples.
  
 ##Semantic Triples
-Semantic triples are expressions in a subject-predicate-object pattern that define intended structure and meaning.  For example, `Sensor/001 hasObserved MilitaryUnit/001` and `MilitaryUnit/001 hasObservation Position/001`.
+Semantic triples are expressions in a subject-predicate-object pattern that define intended structure and meaning.  
 
 The triple pattern is foundational for W3C SPARQL-enabled [SPARQL Protocol and RDF Query Language](https://en.wikipedia.org/wiki/SPARQL) analytic and machine learning algorithms.  Several algorithms are able to consume large aggregations of triples from various sources.
 
