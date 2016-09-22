@@ -64,24 +64,24 @@ Observation is a placeholder for collections of observation results.  Each colle
 ObservingThing is a placeholder for collections of entities, instruments, algorithms and process chains.  For example, an Instrument component contains characteristics assigned to that instrument, such as its model and mounted platform.
 
 ##Linked Data
-[Linked Data](https://en.wikipedia.org/wiki/Linked_data) is an approach to naming things, relations, and concepts using de-referenceable HTTP URLs.  De-referenceable URLs are then available for computers to evaluate and interpret for meaning, context, and associated data.  The URLs create a network of standards-based machine-interpretable data across different documents and HTTP services.
+[Linked Data](https://en.wikipedia.org/wiki/Linked_data) is an approach to identifying things, relations, and concepts with a HTTP URL URI.  Computers may then evaluate and interpret such an URL for meaning, context, and associated data.  The URLs or hyper-links create a network of machine-interpretable data across different documents and HTTP services.
 
 It's analogous to what we do as humans when we evaluate a web-page link in a document and decide whether to follow the link to get more context or related information about a topic.  For example, the following 15 minute video provides more context about linked data: 
 
 [What is Linked Data?](https://www.youtube.com/watch?v=4x_xzT5eF5Q)
 
-The SOI Track data model implements RDFa components to enable Linked Data.  The RDFa components may be set with semantic and de-referenceable URL values to name things, provide additional context, and assert associations.  De-referenceable URLs provide a way for the evaluation and interpretation by computers for more context and related information.  
+The SOI Track data model implements RDFa components to enable Linked Data.  The RDFa components may be set with semantic and de-referenceable URL values.  The values may be from general and domain specific vocabularies.  
+
+For example, to enrich a data component instance with a class categorization property, the property may be represented as a Class concept by the value "http://schema.org/Class" and its assigned categorization value may be "http://www.w3.org/ns/prov#Entity".  The assignments may be notated as follows:   
+'''
+  data-component.property."http://schema.org/Class" = "http://www.w3.org/ns/prov#Entity"
+'''
+Additional meaning may be obtained by de-referencing the URLs (follow the link). 
 
 [Google Structured Data](https://developers.google.com/search/docs/guides/intro-structured-data) implements RDFa to 
 link data and make content eligible for Google Search features such as Rich Cards, Breadcrumbs, Sitelinks Search Box, and Knowledge Graph cards.
 
 Facebook’s OGP [Open Graph Protocol](http://ogp.me/) implements RDFa to link data and turn web pages into graph objects.  OGP “enables any web page to become a rich object in a social graph”, having “the same functionality as any other object on Facebook.”
-
-###What's in it for TSOA?
-TSOA end-points are empowered to exchange their own agreed-upon metadata data components as Linked Data extensions to the SOI Track Datatype contract.
-
-###What's in it for SOI?
-SOI may start with Linked Data by first defining basic metadata vocabulary, something like Facebook did with OGP.  Second, the basic metadata may be implemented by TSOA endpoints to produce nodes in a SOI network graph datastore.  And last, the network graph datastore is searchable by the TSOA community to produce direct hits into the SOI Information Object Repository using record-ids. 
 
 ##Contextual Metadata
 Contextual metadata provides context for a data component instance.  The contextual metadata may: 
@@ -108,7 +108,8 @@ Contextual metadata provides context for a data component instance.  The context
 ```
 The SOI Track data model represents meta-data components for all data components, regardless of their specificity.  Many times meta-data components are represented for larger, more general concepts.  But, smaller, more specific concepts, contained by larger, more general representations, often times do not have meta-data components.  As a work-around, the larger, more general representations may provide a way to enrich their smaller, more specific representations.  However, this approach may duplicate data, create irrelevant dependencies, and add wasteful complexities. 
 
-The placement of contextual metadata within a node's context follows best-practice design principles for interoperability:
+###What's in it for TSOA?
+Linked Data and contextual metadata follow best-practice design principles for interoperability:
 
   * autonomy - may exist independently
   * self-containment - may be represented as a whole
@@ -116,7 +117,13 @@ The placement of contextual metadata within a node's context follows best-practi
   * modularity - may be re-used
   * evolvability - may change 
   
-The SOI Track data model implements RDFa as its meta-data components.  RDFa data components are inherent to each data component described by the SOI Track data model.
+In practice, Linked Data and Contextual Metadata may empower end-points to satisfy specific requirements:
+
+  * extend message contract with composable data components
+  * consume and decouple specific message data components
+  
+###What's in it for SOI?
+SOI may start with Linked Data and contextual metadata by first proscribing basic metadata vocabulary, something like Facebook did with OGP.  This IEP contains proposed metadata vocabulary and usage examples.  Second, the basic metadata may be implemented by TSOA endpoints to produce nodes in a SOI network graph datastore.  And last, the network graph datastore is searchable by the TSOA community to produce direct hits into the SOI Information Object Repository using record-ids. 
 
 ##RDFa 
 RDFa [Resource Description Framework in Attributes](https://en.wikipedia.org/wiki/RDFa) is a W3C Recommendation that defines a set of attribute-level data components for linking and expressing facts about data.  The set of attributes map to the W3C RDF data-model, thereby, enabling the embedding of RDF subject-predicate-object expressions within an XML document. 
