@@ -64,7 +64,7 @@ Observation is a placeholder for collections of observation results.  Each colle
 ObservingThing is a placeholder for collections of entities, instruments, algorithms and process chains.  For example, an Instrument component contains characteristics assigned to that instrument, such as its model and mounted platform.
 
 ##Linked Data
-[Linked Data](https://en.wikipedia.org/wiki/Linked_data) is an approach to identifying things, relations, and concepts with a HTTP URL URI.  Computers may then evaluate and interpret such an URL for meaning, context, and associated data.  The URLs or hyper-links create a network of machine-interpretable data across different documents and HTTP services.
+[Linked Data](https://en.wikipedia.org/wiki/Linked_data) is an approach to identifying things, relations, and concepts with HTTP URL URIs.  Computers may then evaluate and interpret such URLs for meaning, context, and associated data.  The URLs or hyper-links create a network of machine-interpretable data across different documents and HTTP services.
 
 It's analogous to what we do as humans when we evaluate a web-page link in a document and decide whether to follow the link to get more context or related information about a topic.  For example, the following 15 minute video provides more context about linked data: 
 
@@ -72,11 +72,13 @@ It's analogous to what we do as humans when we evaluate a web-page link in a doc
 
 The SOI Track data model implements RDFa components to enable Linked Data.  The RDFa components may be set with semantic and de-referenceable URL values.  The values may be from general and domain specific vocabularies.  
 
-For example, to enrich a data component instance with a class categorization property, the property may be represented as a Class concept by the value "http://schema.org/Class" and its assigned categorization value may be "http://www.w3.org/ns/prov#Entity".  The assignments may be notated as follows:   
-'''
+For example, let's say a TSOA exchange requires the categorization of a data component instance.  To implement this requirement, a category property and its value may be simply identified by URLs in proscribed RDFa components.  The category property may be represented by a Class concept which is identified by and described at "http://schema.org/Class".  A Class categorization value may be identified by and described at "http://www.w3.org/ns/prov#Entity".  
+
+The following notation depicts the data component instance categorization:   
+```
   data-component.property."http://schema.org/Class" = "http://www.w3.org/ns/prov#Entity"
-'''
-Additional meaning may be obtained by de-referencing the URLs (follow the link). 
+```
+Additional meaning may be obtained by de-referencing the URLs (follow the links for meaning, context, and associated data). 
 
 [Google Structured Data](https://developers.google.com/search/docs/guides/intro-structured-data) implements RDFa to 
 link data and make content eligible for Google Search features such as Rich Cards, Breadcrumbs, Sitelinks Search Box, and Knowledge Graph cards.
