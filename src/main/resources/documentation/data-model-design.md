@@ -1,5 +1,5 @@
 #Data Model Design
-The motivations behind this data model design are the following:
+The motivations behind this data model are the following:
 
   * demand for a simpler, more flexible contract for heterogeneous end-points
   * benefit of standardized contextual content to mitigate ambiguity and increase interoperability
@@ -7,7 +7,7 @@ The motivations behind this data model design are the following:
   * benefit of isolating generally stale data from fresh data
   * benefit of documentation in generated Java Classes 
 
-The influence of these motivations is best described by the following differentiating topics:
+As a result, the intent of this data model is to enable or address the following:
 
   * First-Class Data Components
   * Linked-Data
