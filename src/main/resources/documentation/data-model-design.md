@@ -7,7 +7,7 @@ The motivations behind this data model are the following:
   * benefit of isolating generally stale data from fresh data
   * benefit of documentation in generated Java Classes 
 
-As a result, the intent of this data model is to enable or address the following:
+As a result, the intent of this data model is to enable and address the following:
 
   * First-Class Data Components
   * Linked-Data
