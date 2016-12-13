@@ -1,4 +1,6 @@
 #SOI Track Datatype 2.x
+
+[![Join the chat at https://gitter.im/soi-track-datatype/Lobby](https://badges.gitter.im/soi-track-datatype/Lobby.svg)](https://gitter.im/soi-track-datatype/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 SOI Track is a data type that represents concepts related to tracks, or more specifically, observation acts.
 
 An observation act is an observation "associated with a discrete time instant or period through which results are assigned" to a thing-of-interest. The results are obtained by "a specified procedure, such as a sensor, instrument, algorithm or process chain" [OGC and ISO 19156:2011(E), [Observations and Measurements](https://en.wikipedia.org/wiki/Observations_and_Measurements)].  For example, `a military unit's location at discrete time intervals is observed by a platform sensor`.
