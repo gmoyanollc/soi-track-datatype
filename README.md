@@ -28,10 +28,10 @@ The backdrop for taking the initial development deviations are the following:
 The authoritative and complete work is maintained on Software Forge.mil Project [USMC - MAGTF C2](https://software.forge.mil/sf/projects/magtf_c2).
 
 ###TSOA Track 2.0 
-The development artifacts for NIEM-conformant TSOA Track 2.0 are located at Source Code repository [soi-messaging.git/tsoa-track](https://gmoyano@svn.forge.mil/gerrit/p/soi-messaging).
+The development artifacts for NIEM-conformant TSOA Track 2.0 are located at Source Code repository *soi-messaging.git/tsoa-track*.  The Git repository address is `https://gmoyano@svn.forge.mil/gerrit/p/soi-messaging` .
 
 ###SOI Track Datatype 2.0
-The initial development artifacts that deviate from NIEM NDR guidance are located at Source Code repository [SoiMessaging/TsoaInformationModel/DataFormat/soi-track-datatype](https://svn.forge.mil/svn/repos/soimessaging/TsoaInformationModel/DataFormat/soi-track-datatype). 
+The initial development artifacts for SOI Track Datatype 2.0, which deviates from NIEM NDR guidance, are located at Source Code repository [SoiMessaging/TsoaInformationModel/DataFormat/soi-track-datatype](https://svn.forge.mil/svn/repos/soimessaging/TsoaInformationModel/DataFormat/soi-track-datatype). 
 
 A subset of this work, primarily documentation, is on GitHub at [gmoyanollc/soi-track-datatype](https://github.com/gmoyanollc/soi-track-datatype).
 

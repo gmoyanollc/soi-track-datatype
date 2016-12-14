@@ -12,7 +12,7 @@ The above is possible because the intent of the SOI-Track-Datatype-2.0 data mode
   * mutable, allowing objects to change 
   
 ##Simple Data Sets
-Simple data sets are specialized sets of data, such as military unit's organizational characteristics and measurement data, such as geospatial position.  More about the case for simple data sets can be referenced in [Simple, Agile Data Sets](./src/main/resources/documentation/simple-agile-data-sets.md).  
+Simple data sets are specialized sets of data, such as military unit's organizational characteristics and measurement data, such as geospatial position.  More about the case for simple data sets can be referenced in [Simple, Agile Data Sets](./simple-agile-data-sets.md).  
 
 SOI-Track-Datatype-2.0 has enabled the ability for software components to communicate specialized sets of observation data.  A use-case may have one end-point capable of publishing a military unit's organizational characteristics and another end-point, let's say a sensor, capable of publishing measurement data such as geospatial position.  
 
