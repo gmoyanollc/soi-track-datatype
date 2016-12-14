@@ -1,0 +1,252 @@
+<ul data-external-scale="1" data-internal-scale="0.21" class="graph-diagram-markup">
+  <li data-y="7335.208791208798" data-x="4561.904761904765" data-node-id="0" class="node">
+    <span class="caption">Observing /A20</span>
+  </li>
+  <li data-y="4856.959706959711" data-x="17437.545787545685" data-node-id="1" class="node">
+    <span class="caption">Position /E15</span>
+  </li>
+  <li data-y="1427.045177045172" data-x="13023.504273504283" data-node-id="2" class="node">
+    <span class="caption">Position /E32</span>
+  </li>
+  <li data-y="3115.250305250306" data-x="6786.1416361416495" data-node-id="3" class="node">
+    <span class="caption">MilitaryUnit /E20</span>
+  </li>
+  <li data-y="3423.5103785103875" data-x="10953.724053724052" data-node-id="5" class="node">
+    <span class="caption">Platform /E30</span>
+  </li>
+  <li data-y="4560.073260073262" data-x="8670.462759462747" data-node-id="6" class="node">
+    <span class="caption">SOI-Track /E01</span>
+  </li>
+  <li data-y="1346.5909645909667" data-x="4279.339438339434" data-node-id="7" class="node">
+    <span class="caption">Position /E23</span>
+  </li>
+  <li data-y="7933.516483516485" data-x="12771.245421245447" data-node-id="8" class="node">
+    <span class="caption">Observing /A10</span>
+  </li>
+  <li data-y="6713.634187334972" data-x="9673.86049645894" data-node-id="9" class="node">
+    <span class="caption">Missile /E10</span>
+  </li>
+  <li data-y="2207.692307692309" data-x="2355.8608058608143" data-node-id="10" class="node">
+    <span class="caption">Kinetic /E22</span>
+  </li>
+  <li data-y="6869.23076923075" data-x="1302.0146520146525" data-node-id="11" class="node">
+    <span class="caption">Sensor /E21</span>
+  </li>
+  <li data-y="5018.315018315027" data-x="12825.641025641056" data-node-id="13" class="node">
+    <span class="caption">Position /E13</span>
+  </li>
+  <li data-y="7335.208791208798" data-x="16352.19780219778" data-node-id="14" class="node">
+    <span class="caption">Sensor /E14</span>
+  </li>
+  <li data-y="3423.5103785103875" data-x="17380.765567765557" data-node-id="15" class="node">
+    <span class="caption">Sensor /E31</span>
+  </li>
+  <li data-y="3737.3626373626416" data-x="697.4761904761923" data-node-id="16" class="node">
+    <span class="caption">Position /E24</span>
+  </li>
+  <li data-y="4095.238095238095" data-x="14323.809523809525" data-node-id="18" class="node">
+    <span class="caption">Observing /E33</span>
+  </li>
+  <li data-y="1180.9523809523812" data-x="15938.095238095237" data-node-id="19" class="node">
+    <span class="caption">Position /E34</span>
+  </li>
+  <li data-to="5" data-from="2" class="relationship">
+    <span class="type">locationOf</span>
+  </li>
+  <li data-to="6" data-from="3" class="relationship"></li>
+  <li data-to="6" data-from="5" class="relationship"></li>
+  <li data-to="6" data-from="9" class="relationship"></li>
+  <li data-to="3" data-from="7" class="relationship">
+    <span class="type">locationOf</span>
+  </li>
+  <li data-to="3" data-from="10" class="relationship">
+    <span class="type">wasDerivedFrom</span>
+  </li>
+  <li data-to="11" data-from="7" class="relationship">
+    <span class="type">hadPrimarySource</span>
+  </li>
+  <li data-to="9" data-from="13" class="relationship">
+    <span class="type">locationOf</span>
+  </li>
+  <li data-to="11" data-from="10" class="relationship">
+    <span class="type">hadPrimarySource</span>
+  </li>
+  <li data-to="15" data-from="2" class="relationship">
+    <span class="type">hadPrimarySource</span>
+  </li>
+  <li data-to="13" data-from="9" class="relationship">
+    <span class="type">atLocation</span>
+  </li>
+  <li data-to="7" data-from="3" class="relationship">
+    <span class="type">atLocation</span>
+  </li>
+  <li data-to="10" data-from="3" class="relationship">
+    <span class="type">hadDerivation</span>
+  </li>
+  <li data-to="2" data-from="5" class="relationship">
+    <span class="type">atLocation</span>
+  </li>
+  <li data-to="7" data-from="11" class="relationship">
+    <span class="type">wasdPrimarySource</span>
+  </li>
+  <li data-to="10" data-from="11" class="relationship">
+    <span class="type">wasPrimarySource</span>
+  </li>
+  <li data-to="2" data-from="15" class="relationship">
+    <span class="type">wasPrimarySourceOf</span>
+  </li>
+  <li data-to="9" data-from="8" class="relationship">
+    <span class="type">wasInfluencedBy</span>
+  </li>
+  <li data-to="8" data-from="9" class="relationship">
+    <span class="type">influenced</span>
+  </li>
+  <li data-to="14" data-from="8" class="relationship">
+    <span class="type">wasInfluencedBy</span>
+  </li>
+  <li data-to="8" data-from="14" class="relationship">
+    <span class="type">influenced</span>
+  </li>
+  <li data-to="13" data-from="8" class="relationship">
+    <span class="type">generated</span>
+  </li>
+  <li data-to="8" data-from="13" class="relationship">
+    <span class="type">wasGeneratedBy</span>
+  </li>
+  <li data-to="14" data-from="13" class="relationship">
+    <span class="type">hadPrimarySource</span>
+  </li>
+  <li data-to="1" data-from="14" class="relationship">
+    <span class="type">atLocation</span>
+  </li>
+  <li data-to="14" data-from="1" class="relationship">
+    <span class="type">locationOf</span>
+  </li>
+  <li data-to="13" data-from="14" class="relationship">
+    <span class="type">wasPrimarySourceOf</span>
+  </li>
+  <li data-to="5" data-from="6" class="relationship"></li>
+  <li data-to="9" data-from="6" class="relationship"></li>
+  <li data-to="3" data-from="6" class="relationship"></li>
+  <li data-to="0" data-from="3" class="relationship">
+    <span class="type">influenced</span>
+  </li>
+  <li data-to="3" data-from="0" class="relationship">
+    <span class="type">wasInfluenced</span>
+  </li>
+  <li data-to="0" data-from="11" class="relationship">
+    <span class="type">influenced</span>
+  </li>
+  <li data-to="11" data-from="0" class="relationship">
+    <span class="type">wasInfluencedBy</span>
+  </li>
+  <li data-to="16" data-from="11" class="relationship">
+    <span class="type">atLocation</span>
+  </li>
+  <li data-to="11" data-from="16" class="relationship">
+    <span class="type">locationOf</span>
+  </li>
+  <li data-to="15" data-from="18" class="relationship">
+    <span class="type">wasInfluencedBy</span>
+  </li>
+  <li data-to="5" data-from="18" class="relationship">
+    <span class="type">wasInfluencedBy</span>
+  </li>
+  <li data-to="18" data-from="5" class="relationship">
+    <span class="type">Influenced</span>
+  </li>
+  <li data-to="18" data-from="15" class="relationship">
+    <span class="type">influenced</span>
+  </li>
+  <li data-to="19" data-from="15" class="relationship">
+    <span class="type">atLocation</span>
+  </li>
+  <li data-to="15" data-from="19" class="relationship">
+    <span class="type">locationOf</span>
+  </li>
+  <li data-to="7" data-from="0" class="relationship">
+    <span class="type">generated</span>
+  </li>
+  <li data-to="0" data-from="7" class="relationship">
+    <span class="type">wasGeneratedBy</span>
+  </li>
+  <li data-to="10" data-from="0" class="relationship">
+    <span class="type">generated</span>
+  </li>
+  <li data-to="0" data-from="10" class="relationship">
+    <span class="type">wasGeneratedBy</span>
+  </li>
+  <li data-to="2" data-from="18" class="relationship">
+    <span class="type">generated</span>
+  </li>
+  <li data-to="18" data-from="2" class="relationship">
+    <span class="type">wasGeneratedBy</span>
+  </li>
+</ul>
+
+CREATE 
+  (`0` :`Observing /A20` ) ,
+  (`1` :`Position /E15` ) ,
+  (`2` :`Position /E32` ) ,
+  (`3` :`MilitaryUnit /E20` ) ,
+  (`5` :`Platform /E30` ) ,
+  (`6` :`SOI-Track /E01` ) ,
+  (`7` :`Position /E23` ) ,
+  (`8` :`Observing /A10` ) ,
+  (`9` :`Missile /E10` ) ,
+  (`10` :`Kinetic /E22` ) ,
+  (`11` :`Sensor /E21` ) ,
+  (`13` :`Position /E13` ) ,
+  (`14` :`Sensor /E14` ) ,
+  (`15` :`Sensor /E31` ) ,
+  (`16` :`Position /E24` ) ,
+  (`18` :`Observing /E33` ) ,
+  (`19` :`Position /E34` ) ,
+  (`2`)-[:`locationOf`]->(`5`),
+  (`3`)-[:`RELATED_TO`]->(`6`),
+  (`5`)-[:`RELATED_TO`]->(`6`),
+  (`9`)-[:`RELATED_TO`]->(`6`),
+  (`7`)-[:`locationOf`]->(`3`),
+  (`10`)-[:`wasDerivedFrom`]->(`3`),
+  (`7`)-[:`hadPrimarySource`]->(`11`),
+  (`13`)-[:`locationOf`]->(`9`),
+  (`10`)-[:`hadPrimarySource`]->(`11`),
+  (`2`)-[:`hadPrimarySource`]->(`15`),
+  (`9`)-[:`atLocation`]->(`13`),
+  (`3`)-[:`atLocation`]->(`7`),
+  (`3`)-[:`hadDerivation`]->(`10`),
+  (`5`)-[:`atLocation`]->(`2`),
+  (`11`)-[:`wasdPrimarySource`]->(`7`),
+  (`11`)-[:`wasPrimarySource`]->(`10`),
+  (`15`)-[:`wasPrimarySourceOf`]->(`2`),
+  (`8`)-[:`wasInfluencedBy`]->(`9`),
+  (`9`)-[:`influenced`]->(`8`),
+  (`8`)-[:`wasInfluencedBy`]->(`14`),
+  (`14`)-[:`influenced`]->(`8`),
+  (`8`)-[:`generated`]->(`13`),
+  (`13`)-[:`wasGeneratedBy`]->(`8`),
+  (`13`)-[:`hadPrimarySource`]->(`14`),
+  (`14`)-[:`atLocation`]->(`1`),
+  (`1`)-[:`locationOf`]->(`14`),
+  (`14`)-[:`wasPrimarySourceOf`]->(`13`),
+  (`6`)-[:`RELATED_TO`]->(`5`),
+  (`6`)-[:`RELATED_TO`]->(`9`),
+  (`6`)-[:`RELATED_TO`]->(`3`),
+  (`3`)-[:`influenced`]->(`0`),
+  (`0`)-[:`wasInfluenced`]->(`3`),
+  (`11`)-[:`influenced`]->(`0`),
+  (`0`)-[:`wasInfluencedBy`]->(`11`),
+  (`11`)-[:`atLocation`]->(`16`),
+  (`16`)-[:`locationOf`]->(`11`),
+  (`18`)-[:`wasInfluencedBy`]->(`15`),
+  (`18`)-[:`wasInfluencedBy`]->(`5`),
+  (`5`)-[:`Influenced`]->(`18`),
+  (`15`)-[:`influenced`]->(`18`),
+  (`15`)-[:`atLocation`]->(`19`),
+  (`19`)-[:`locationOf`]->(`15`),
+  (`0`)-[:`generated`]->(`7`),
+  (`7`)-[:`wasGeneratedBy`]->(`0`),
+  (`0`)-[:`generated`]->(`10`),
+  (`10`)-[:`wasGeneratedBy`]->(`0`),
+  (`18`)-[:`generated`]->(`2`),
+  (`2`)-[:`wasGeneratedBy`]->(`18`)
